@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {ApplicationUser} from '../models/application.user';
 import jwt_decode from 'jwt-decode';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string): Observable<ApplicationUser> {
-    return this.http.post<any>('http://localhost:3000/login', {username: email, password}).pipe(
+    return this.http.post<any>(`${environment.backEndUrl}login`, {username: email, password}).pipe(
       map(user => {
         if (user && user.accessToken) {
           localStorage.setItem('currentUser', JSON.stringify(user));

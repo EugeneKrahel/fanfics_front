@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../models/user';
 import {Fanfic} from '../models/fanfic';
+import {environment} from '../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class UsersService {
@@ -14,18 +15,18 @@ export class UsersService {
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>('http://localhost:3000/users');
+    return this.http.get<User[]>(`${environment.backEndUrl}users`);
   }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`http://localhost:3000/users/search?id=${id}`);
+    return this.http.get<User>(`${environment.backEndUrl}users/search?id=${id}`);
   }
 
   save(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:3000/users', user, this.httpOptions);
+    return this.http.post<User>(`${environment.backEndUrl}users`, user, this.httpOptions);
   }
 
   delete(user: User): Observable<void> {
-    return this.http.delete<void>(`http://localhost:3000/users?username=${user.username}`);
+    return this.http.delete<void>(`${environment.backEndUrl}users?username=${user.username}`);
   }
 }

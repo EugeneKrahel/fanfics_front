@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Chapter} from '../models/chapter';
 import {Fanfic} from '../models/fanfic';
+import {environment} from '../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class ChaptersService {
@@ -14,22 +15,22 @@ export class ChaptersService {
   }
 
   getAll(): Observable<Chapter[]> {
-    return this.http.get<Chapter[]>('http://localhost:3000/chapters');
+    return this.http.get<Chapter[]>(`${environment.backEndUrl}chapters`);
   }
 
   save(chapter: Chapter): Observable<Chapter> {
-    return this.http.post<Chapter>('http://localhost:3000/chapters', chapter, this.httpOptions);
+    return this.http.post<Chapter>(`${environment.backEndUrl}chapters`, chapter, this.httpOptions);
   }
 
   searchByFanfic(fanficId: number): Observable<Chapter[]> {
-    return this.http.get<Chapter[]>(`http://localhost:3000/chapters/search/fanfic?id=${fanficId}`);
+    return this.http.get<Chapter[]>(`${environment.backEndUrl}chapters/search/fanfic?id=${fanficId}`);
   }
 
   searchID(id: number): Observable<Chapter> {
-    return this.http.get<Chapter>(`http://localhost:3000/chapters/search/id?id=${id}`);
+    return this.http.get<Chapter>(`${environment.backEndUrl}chapters/search/id?id=${id}`);
   }
 
   delete(chapter: Chapter): Observable<void> {
-    return this.http.delete<void>(`http://localhost:3000/chapters?id=${chapter.id}`);
+    return this.http.delete<void>(`${environment.backEndUrl}chapters?id=${chapter.id}`);
   }
 }
