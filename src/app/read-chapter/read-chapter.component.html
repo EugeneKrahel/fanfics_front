@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-lg-2 col-md-1 col-sm-1"></div>
+    <div class="col-lg-8 col-md-10 col-sm-10">
+      <h2 style="text-align: center">{{this.chapter?.title | uppercase}}</h2>
+      <markdown [data]="this.chapter?.content" style="word-wrap: normal"></markdown>
+    </div>
+    <div class="col-lg-2 col-md-1 col-sm-1"></div>
+  </div>
+</div>

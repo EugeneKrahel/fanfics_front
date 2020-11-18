@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-lg-3 col-md-2 col-sm-1"></div>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+      </mat-form-field>
+
+      <div>
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Author</th>
+            <td mat-cell *matCellDef="let row"
+                [routerLink]="['/profile', row.author.id]"
+                style="cursor: pointer">
+              {{row.author.username}}
+              <button mat-button matSuffix mat-icon-button
+                      [routerLink]="['/profile', row.author.id]">
+                <mat-icon>account_box</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fanfic</th>
+            <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="genre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Genre</th>
+            <td mat-cell *matCellDef="let row"> {{row.genre}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="ReadEditDelete">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-button matSuffix mat-icon-button>
+                <mat-icon>preview</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No fanfics involving "{{input.value}}"</td>
+          </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-2 col-sm-1"></div>
+  </div>
+</div>

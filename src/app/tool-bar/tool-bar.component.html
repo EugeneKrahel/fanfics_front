@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row bg-dark">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-1 col-md-2 col-sm-3">
+            <img [routerLink]="['']" style="cursor: pointer; margin: 10px 5px 10px 0;" width="36" height="36"
+                 src="https://lh3.googleusercontent.com/k75o6MEvqLq-rC60_ZMzUo9euudfoGDHAT7FQA9hkqO90C2VNDoZnN0PSDw8rPqAAZFMwJhSeI19ihF0TYyZzw=s400">
+          </div>
+          <div class="col-lg-7 col-md-4 col-sm-4">
+            <button mat-flat-button color="primary"
+                    style="margin: 10px 5px 10px 0;"
+                    [routerLink]="['/new']"
+                    *ngIf="isAuthorized()">
+              New fanfic
+            </button>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-5">
+            <button mat-flat-button color="primary"
+                    style="margin: 10px 5px;"
+                    [routerLink]="['/login']"
+                    *ngIf="!isAuthorized()">
+              Login
+            </button>
+            <button mat-flat-button color="primary"
+                    style="margin: 10px 0 10px 5px;"
+                    [routerLink]="['/registration']"
+                    *ngIf="!isAuthorized()">
+              Registration
+            </button>
+            <button mat-flat-button color="primary"
+                    style="margin: 10px 5px 10px 0;"
+                    [routerLink]="['/profile', this.decoded.sub]"
+                    *ngIf="isAuthorized()">
+              Profile
+            </button>
+            <button mat-flat-button color="primary"
+                    style="margin: 10px 0 10px 5px;"
+                    [routerLink]="['']"
+                    *ngIf="isAuthorized()"
+                    (click)="logout()">
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>

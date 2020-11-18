@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-lg-3 col-md-2 col-sm-1"></div>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <form [formGroup]="newUserForm">
+        <h2>Login</h2>
+        <div class="row">
+          <mat-form-field class="col-12 mt-3" appearance="fill">
+            <mat-label>Enter your email</mat-label>
+            <input formControlName="email" matInput placeholder="pat@example.com" required>
+            <mat-error *ngIf="_email.hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="_email.hasError('maxlength')">Email should not be longer then 256 symbols</mat-error>
+            <mat-error *ngIf="_email.hasError('email')">Invalid email</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-12" appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="_password.hasError('required')">Password is required</mat-error>
+            <mat-error *ngIf="_password.hasError('maxlength')">Invalid password</mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+      <button mat-flat-button color="primary" style="margin: 10px 5px" (click)="login()" [routerLink]="['']">Login
+      </button>
+      <button mat-flat-button color="primary" style="margin: 10px 5px" [routerLink]="['']">Cancel</button>
+    </div>
+    <div class="col-lg-3 col-md-2 col-sm-1"></div>
+  </div>
+</div>

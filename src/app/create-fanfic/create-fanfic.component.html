@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-lg-3 col-md-2 col-sm-1"></div>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <h2>New Fanfic</h2>
+
+      <mat-divider class="mb-2"></mat-divider>
+
+      <form [formGroup]="newFanficForm" novalidate>
+        <div class="row">
+          <div class="col-4" style="margin-top: 10px">
+            Fanfic's name:
+          </div>
+          <div class="col-8">
+            <mat-form-field class="form-field">
+              <mat-label>Name</mat-label>
+              <input matInput type="text" formControlName="name">
+              <mat-error *ngIf="_name.hasError('required')">Name is required</mat-error>
+              <mat-error *ngIf="_name.hasError('maxlength')">Name should not be longer then 256 symbols</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <mat-divider class="mb-2"></mat-divider>
+
+        <div class="row">
+          <div class="col-4 " style="margin-top: 10px">
+            Fanfic's description:
+          </div>
+          <div class="col-8">
+            <mat-form-field class="form-field">
+              <mat-label>Description</mat-label>
+              <label>
+                <textarea matInput placeholder="Leave a description" formControlName="description"></textarea>
+              </label>
+              <mat-hint align="start"
+                        [ngClass]="_description.hasError('maxlength') ? 'error' : ''">{{_description.value.length}} /
+                1024
+              </mat-hint>
+              <mat-error *ngIf="_description.hasError('required')">Description is required</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <mat-divider class="mb-2"></mat-divider>
+
+        <div class="row">
+          <div class="col-4 " style="margin-top: 10px">
+            Genre:
+          </div>
+          <div class="col-8">
+            <mat-form-field class="form-field">
+              <mat-label>Genre</mat-label>
+              <mat-select formControlName="genre" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let genre of genres" [value]="genre">
+                  {{genre}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="_genre.hasError('required')">Genre is required</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+
+      <mat-divider class="mb-2"></mat-divider>
+
+      <div class="row">
+        <div class="col-4 " style="margin-top: 10px">
+          Tags:
+        </div>
+        <div class="col-8">
+          <mat-form-field class="form-field">
+            <mat-chip-list #chipList aria-label="tag selection">
+              <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                        [removable]="removable" (removed)="remove(tag)">
+                {{tag.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="New tag..."
+                     #tagInput
+                     [matAutocomplete]="auto"
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     (matChipInputTokenEnd)="add($event)"
+                     [(ngModel)]="tag"
+                     (ngModelChange)="onTextChange()">
+            </mat-chip-list>
+            <mat-autocomplete (optionSelected)="selected($event)" #auto="matAutocomplete">
+              <mat-option *ngFor="let tag of allTags" [value]="tag" (click)="autoAdd(tag)">
+                {{tag}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-divider class="mb-2"></mat-divider>
+      <button mat-flat-button color="primary" style="margin: 10px 5px "
+              (click)="create()"
+              [routerLink]="['/']">Create
+      </button>
+    </div>
+    <div class="col-lg-3 col-md-2 col-sm-1"></div>
+  </div>
+</div>
