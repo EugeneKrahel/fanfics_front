@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~10.1.5",
     "@angular/router": "~10.1.5",
     "bootstrap": "~4.5.3",
+    "express": "^4.17.1",
     "jwt-decode": "^3.1.1",
     "ngx-chips": "^2.2.1",
     "ngx-markdown": "^10.1.1",
