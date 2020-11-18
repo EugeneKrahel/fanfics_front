@@ -3,6 +3,7 @@ import {map} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {ApplicationUser} from '../models/application.user';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,15 @@ export class AuthenticationService {
   isAuthorized(): boolean {
     const currentUser = this.currentUserValue;
     return !!(currentUser && currentUser.accessToken);
+  }
+
+  getDecodedUser(): any | undefined {
+    if (this.currentUser) {
+      const jwtDecode = jwt_decode(this.currentUserValue.accessToken);
+      if (typeof jwtDecode === 'object') {
+        return jwtDecode as any;
+      }
+    }
+    return undefined;
   }
 }

@@ -31,7 +31,7 @@
             </button>
             <button mat-flat-button color="primary"
                     style="margin: 10px 5px 10px 0;"
-                    [routerLink]="['/profile', this.decoded.sub]"
+                    [routerLink]="['/profile', authenticationService.getDecodedUser().sub]"
                     *ngIf="isAuthorized()">
               Profile
             </button>
