@@ -27,7 +27,7 @@
             <mat-form-field class="form-field">
               <mat-label>Content <small>(supports markdown)</small></mat-label>
               <label>
-                <textarea markdown matInput formControlName="content" cols="60" rows="5">{{chapter?.content}}</textarea>
+                <textarea markdown matInput formControlName="content" cols="60" rows="5" value="{{chapter?.content}}"></textarea>
               </label>
               <mat-error *ngIf="_title.hasError('required')">Content is required</mat-error>
             </mat-form-field>
@@ -43,7 +43,7 @@
       <mat-divider class="mt-3 mb-3"></mat-divider>
       <button mat-flat-button color="primary" style="margin: 10px 0"
               (click)="update()"
-              [routerLink]="['/fanfic', this.chapterId, 'read']">Update</button>
+              [routerLink]="['/chapter', chapterId, 'read']">Update</button>
     </div>
     <div class="col-lg-2 col-md-1 col-sm-1"></div>
   </div>
