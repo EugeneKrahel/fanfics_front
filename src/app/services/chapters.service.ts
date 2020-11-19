@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Chapter} from '../models/chapter';
-import {Fanfic} from '../models/fanfic';
 import {environment} from '../../environments/environment';
 
 @Injectable({providedIn: 'root'})
@@ -20,6 +19,10 @@ export class ChaptersService {
 
   save(chapter: Chapter): Observable<Chapter> {
     return this.http.post<Chapter>(`${environment.backEndUrl}chapters`, chapter, this.httpOptions);
+  }
+
+  update(chapter: Chapter): Observable<Chapter> {
+    return  this.http.put<Chapter>(`${environment.backEndUrl}chapters/:id`, chapter, this.httpOptions);
   }
 
   searchByFanfic(fanficId: number): Observable<Chapter[]> {
