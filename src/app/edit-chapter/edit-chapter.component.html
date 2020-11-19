@@ -27,7 +27,7 @@
             <mat-form-field class="form-field">
               <mat-label>Content <small>(supports markdown)</small></mat-label>
               <label>
-                <textarea markdown matInput formControlName="content">{{chapter?.content}}</textarea>
+                <textarea matInput formControlName="content">{{chapter?.content}}</textarea>
               </label>
               <mat-error *ngIf="_title.hasError('required')">Content is required</mat-error>
             </mat-form-field>
