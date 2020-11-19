@@ -22,7 +22,7 @@ export class ChaptersService {
   }
 
   update(chapter: Chapter): Observable<Chapter> {
-    return  this.http.put<Chapter>(`${environment.backEndUrl}chapters`, chapter, this.httpOptions);
+    return  this.http.put<Chapter>(`${environment.backEndUrl}chapters/id=${chapter.id}`, chapter, this.httpOptions);
   }
 
   searchByFanfic(fanficId: number): Observable<Chapter[]> {
