@@ -5,24 +5,19 @@
       <h2>Fanfic's info:</h2>
       <h3>Title: {{this.fanfic?.title}}</h3>
       <h3>Genre: {{this.fanfic?.genre}}</h3>
+<!--      <h3>Description: {{this.fanfic?.des}}</h3>-->
       <div *ngIf="this.chapters?.length">
         <h3>Chapters:</h3>
 
         <ul>
-          <li *ngFor="let chapter of this.chapters.reverse()"
-              class="mb-3">
+          <mat-divider></mat-divider>
+          <li *ngFor="let chapter of this.chapters">
             <div class="row">
-              <div class="col-4">
+              <div class="col-4" style="margin: auto 0">
                 {{chapter.title}}
               </div>
               <div class="col-8>">
 
-                <button mat-button matSuffix mat-icon-button>
-                  <mat-icon [routerLink]="['/chapter', chapter.id, 'read']"
-                            style="cursor: pointer">
-                    preview
-                  </mat-icon>
-                </button>
                 <button mat-button matSuffix mat-icon-button
                         [routerLink]="['/chapter', chapter.id, 'edit']">
                   <mat-icon>edit</mat-icon>
@@ -34,6 +29,7 @@
                 </button>
               </div>
             </div>
+            <mat-divider></mat-divider>
           </li>
         </ul>
       </div>

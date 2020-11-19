@@ -44,8 +44,9 @@ export class FanficEditorComponent implements OnInit {
 
   search(): void {
     this.chaptersService.searchByFanfic(this.id).subscribe(data => {
-        console.log(data);
         this.chapters = data;
+        this.chapters.sort((a, b) => a.id > b.id ? 1 : -1);
+        console.log(this.chapters);
       }
     );
   }

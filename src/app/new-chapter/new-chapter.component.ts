@@ -32,9 +32,9 @@ export class NewChapterComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.pipe(
       switchMap(params => params.getAll('id'))).subscribe(
-        data => {
-          this.fanficID = +data;
-        });
+      data => {
+        this.fanficID = +data;
+      });
   }
 
   changeEditToRead(): void {

@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {AuthenticationService} from '../services/authentication.service';
 import {FanficsService} from '../services/fanfics.service';
 import {switchMap} from 'rxjs/operators';
+import {User} from '../models/user';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +21,7 @@ export class ProfileComponent implements OnInit {
   userFanfics: Fanfic[];
 
   id: number;
+  user: User;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +34,10 @@ export class ProfileComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap(params => params.getAll('id'))).subscribe(data => this.id = +data);
 
+    this.usersService.getUserById(this.id).subscribe(data => {
+      this.user = data;
+      console.log(data);
+    });
     this.search();
   }
 

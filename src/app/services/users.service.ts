@@ -19,7 +19,7 @@ export class UsersService {
   }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`${environment.backEndUrl}users/search?id=${id}`);
+    return this.http.get<User>(`${environment.backEndUrl}users/search/id?id=${id}`);
   }
 
   save(user: User): Observable<User> {

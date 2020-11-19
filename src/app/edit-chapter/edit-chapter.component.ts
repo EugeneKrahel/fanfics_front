@@ -5,6 +5,7 @@ import {FanficsService} from '../services/fanfics.service';
 import {ChaptersService} from '../services/chapters.service';
 import {switchMap} from 'rxjs/operators';
 import {Chapter} from '../models/chapter';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-edit-chapter',
@@ -20,7 +21,8 @@ export class EditChapterComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private fb: FormBuilder,
               private fanficsService: FanficsService,
-              private chaptersService: ChaptersService) {
+              private chaptersService: ChaptersService,
+              private location: Location) {
   }
 
   get _title(): AbstractControl {
@@ -66,6 +68,7 @@ export class EditChapterComponent implements OnInit {
         console.log(data);
       }
     );
+    this.location.back();
   }
 
   private createForm(chapter: Chapter): void {

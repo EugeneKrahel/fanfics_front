@@ -31,8 +31,9 @@ import {MatSortModule} from '@angular/material/sort';
 import {FanficEditorComponent} from './fanfic-editor/fanfic-editor.component';
 import {NewChapterComponent} from './new-chapter/new-chapter.component';
 import {MarkdownModule} from 'ngx-markdown';
-import { ReadChapterComponent } from './read-chapter/read-chapter.component';
-import { EditChapterComponent } from './edit-chapter/edit-chapter.component';
+import {EditChapterComponent} from './edit-chapter/edit-chapter.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {ReadFanficComponent} from './read-fanfic/read-fanfic.component';
 
 @NgModule({
   declarations: [
@@ -45,8 +46,8 @@ import { EditChapterComponent } from './edit-chapter/edit-chapter.component';
     ProfileComponent,
     FanficEditorComponent,
     NewChapterComponent,
-    ReadChapterComponent,
-    EditChapterComponent
+    EditChapterComponent,
+    ReadFanficComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +70,8 @@ import { EditChapterComponent } from './edit-chapter/edit-chapter.component';
     MatSelectModule,
     MatPaginatorModule,
     MatSortModule,
-    MarkdownModule.forRoot({ loader: HttpClient })
+    MarkdownModule.forRoot({loader: HttpClient}),
+    MatExpansionModule
   ],
   providers: [jwtInterceptorProvider, errorInterceptorProvider],
   bootstrap: [AppComponent]

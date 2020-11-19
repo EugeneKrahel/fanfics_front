@@ -26,7 +26,7 @@ export class ChaptersService {
   }
 
   searchByFanfic(fanficId: number): Observable<Chapter[]> {
-    return this.http.get<Chapter[]>(`${environment.backEndUrl}chapters/search/fanfic?id=${fanficId}`);
+      return this.http.get<Chapter[]>(`${environment.backEndUrl}chapters/search/fanfic?id=${fanficId}`);
   }
 
   searchID(id: number): Observable<Chapter> {
