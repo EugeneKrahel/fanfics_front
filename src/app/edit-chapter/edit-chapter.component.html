@@ -11,7 +11,7 @@
             <mat-form-field class="form-field">
               <mat-label>Title</mat-label>
               <label>
-                <input matInput type="text" formControlName="title">
+                <input matInput type="text" formControlName="title" value="{{chapter.title}}">
               </label>
               <mat-error *ngIf="_title.hasError('required')">Title is required</mat-error>
               <mat-error *ngIf="_title.hasError('maxlength')">Title should not be longer then 256 symbols</mat-error>
@@ -27,7 +27,7 @@
             <mat-form-field class="form-field">
               <mat-label>Content <small>(supports markdown)</small></mat-label>
               <label>
-                <textarea markdown matInput formControlName="content" cols="60" rows="5"></textarea>
+                <textarea markdown matInput formControlName="content" cols="60" rows="5">{{chapter?.content}}</textarea>
               </label>
               <mat-error *ngIf="_title.hasError('required')">Content is required</mat-error>
             </mat-form-field>

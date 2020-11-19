@@ -40,8 +40,6 @@ export class EditChapterComponent implements OnInit {
       data => {
         console.log(data);
         this.chapter = data;
-        this.newChapterForm.value.title = data.title;
-        this.newChapterForm.value.content = data.content;
       }
     );
   }
