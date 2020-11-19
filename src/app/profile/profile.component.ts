@@ -4,7 +4,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Fanfic} from '../models/fanfic';
 import {UsersService} from '../services/users.service';
 import {ActivatedRoute} from '@angular/router';
-import jwt_decode from 'jwt-decode';
 import {AuthenticationService} from '../services/authentication.service';
 import {FanficsService} from '../services/fanfics.service';
 import {switchMap} from 'rxjs/operators';
@@ -18,8 +17,6 @@ export class ProfileComponent implements OnInit {
   displayedColumns: string[] = ['name', 'genre', 'ReadEditDelete'];
   dataSource: MatTableDataSource<Fanfic>;
   @ViewChild(MatSort) sort: MatSort;
-  token = this.authenticationService.currentUserValue.accessToken;
-  decoded: any;
   userFanfics: Fanfic[];
 
   id: number;
@@ -35,10 +32,6 @@ export class ProfileComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap(params => params.getAll('id'))).subscribe(data => this.id = +data);
 
-    const jwtDecode = jwt_decode(this.token);
-    if (typeof jwtDecode === 'object') {
-      this.decoded = jwtDecode as any;
-    }
     this.search();
   }
 
@@ -66,7 +59,7 @@ export class ProfileComponent implements OnInit {
   }
 
   isEditor(): boolean {
-    return this.id === this.decoded.sub;
+    return this.id === this.authenticationService.getDecodedUser().sub;
   }
 }
 
