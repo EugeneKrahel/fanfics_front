@@ -2,7 +2,7 @@
   <div class="row mt-3">
     <div class="col-lg-2 col-md-1 col-sm-1"></div>
     <div class="col-lg-8 col-md-10 col-sm-10">
-      <form [formGroup]="newChapterForm" novalidate>
+      <form [formGroup]="newChapterForm" novalidate *ngIf="newChapterForm">
         <div class="row">
           <div class="col-4" style="margin-top: 10px">
             Chapter title:
@@ -10,9 +10,7 @@
           <div class="col-8">
             <mat-form-field class="form-field">
               <mat-label>Title</mat-label>
-              <label>
-                <input matInput type="text" formControlName="title" value="{{chapter?.title}}">
-              </label>
+              <input matInput type="text" formControlName="title">
               <mat-error *ngIf="_title.hasError('required')">Title is required</mat-error>
               <mat-error *ngIf="_title.hasError('maxlength')">Title should not be longer then 256 symbols</mat-error>
             </mat-form-field>
@@ -26,10 +24,8 @@
           <div *ngIf="edit" style="margin-top: 10px">
             <mat-form-field class="form-field">
               <mat-label>Content <small>(supports markdown)</small></mat-label>
-              <label>
-                <textarea matInput formControlName="content">{{chapter?.content}}</textarea>
-              </label>
-              <mat-error *ngIf="_title.hasError('required')">Content is required</mat-error>
+              <textarea matInput formControlName="content"></textarea>
+              <mat-error *ngIf="_content.hasError('required')">Content is required</mat-error>
             </mat-form-field>
           </div>
           <div *ngIf="!edit">
@@ -43,7 +39,8 @@
       <mat-divider class="mt-3 mb-3"></mat-divider>
       <button mat-flat-button color="primary" style="margin: 10px 0"
               (click)="update()"
-              [routerLink]="['/chapter', chapterId, 'read']">Update</button>
+              [routerLink]="['/chapter', chapterId, 'read']">Update
+      </button>
     </div>
     <div class="col-lg-2 col-md-1 col-sm-1"></div>
   </div>

@@ -16,17 +16,19 @@ export class EditChapterComponent implements OnInit {
   edit = true;
   editToRead = 'Read';
   chapterId: number;
-  chapter: Chapter;
 
   constructor(private route: ActivatedRoute,
               private fb: FormBuilder,
               private fanficsService: FanficsService,
               private chaptersService: ChaptersService) {
-    this.createForm();
   }
 
   get _title(): AbstractControl {
     return this.newChapterForm.get('title');
+  }
+
+  get _content(): AbstractControl {
+    return this.newChapterForm.get('content');
   }
 
   ngOnInit(): void {
@@ -39,7 +41,7 @@ export class EditChapterComponent implements OnInit {
     this.chaptersService.searchID(this.chapterId).subscribe(
       data => {
         console.log(data);
-        this.chapter = data;
+        this.createForm(data);
       }
     );
   }
@@ -55,19 +57,21 @@ export class EditChapterComponent implements OnInit {
   }
 
   update(): void {
-    this.chapter.title = this.newChapterForm.value.title;
-    this.chapter.content = this.newChapterForm.value.content;
-    this.chaptersService.update(this.chapter).subscribe(
+    const chapter: Chapter = new Chapter();
+    chapter.id = this.chapterId;
+    chapter.title = this.newChapterForm.value.title;
+    chapter.content = this.newChapterForm.value.content;
+    this.chaptersService.update(chapter).subscribe(
       data => {
         console.log(data);
       }
     );
   }
 
-  private createForm(): void {
+  private createForm(chapter: Chapter): void {
     this.newChapterForm = this.fb.group({
-        title: ['', [Validators.required, Validators.maxLength(256)]],
-        content: ['', [Validators.required]]
+        title: [chapter.title, [Validators.required, Validators.maxLength(256)]],
+        content: [chapter.content, [Validators.required]]
       }
     );
   }
