@@ -56,7 +56,7 @@ export class EditChapterComponent implements OnInit {
     }
   }
 
-  save(): void {
+  update(): void {
     const chapter: Chapter = new Chapter();
     chapter.title = this.newChapterForm.value.title;
     chapter.content = this.newChapterForm.value.content;
