@@ -2,7 +2,7 @@
   <div class="row mt-3">
     <div class="col-lg-2 col-md-1 col-sm-1"></div>
     <div class="col-lg-8 col-md-10 col-sm-10">
-      <h2 style="text-align: center">{{fanfic.title | uppercase}}</h2>
+      <h2 style="text-align: center" *ngIf="fanfic">{{fanfic.title | uppercase}}</h2>
       <mat-accordion>
         <mat-expansion-panel [expanded]="contentsOpenState === true"
                              (opened)="contentsOpenState = true"
@@ -34,8 +34,7 @@
       <div>
         <mat-accordion>
           <mat-expansion-panel (opened)="commentsOpenState = true"
-                               (closed)="commentsOpenState = false"
-                               *ngIf="allChapters">
+                               (closed)="commentsOpenState = false">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Comments
@@ -43,25 +42,45 @@
             </mat-expansion-panel-header>
             <form [formGroup]="newCommentForm" novalidate class="mb-5">
 
-                  <mat-form-field class="form-field">
-                    <mat-label>Write a comment</mat-label>
-                    <input matInput type="text" formControlName="comment">
-                    <mat-hint align="start"
-                              [ngClass]="_comment.hasError('maxlength') ? 'error' : ''">{{_comment.value.length}} /
-                      512
-                    </mat-hint>
-                    <mat-error *ngIf="_comment.hasError('required')">Comment is required</mat-error>
-                    <mat-error *ngIf="_comment.hasError('maxlength')">Comment should not be longer then 256 symbols
-                    </mat-error>
-                  </mat-form-field>
+              <mat-form-field class="form-field">
+                <mat-label>Write a comment</mat-label>
+                <input matInput type="text" formControlName="comment">
+                <mat-hint align="start"
+                          [ngClass]="_comment.hasError('maxlength') ? 'error' : ''">{{_comment.value.length}} /
+                  512
+                </mat-hint>
+                <mat-error *ngIf="_comment.hasError('required')">Comment is required</mat-error>
+                <mat-error *ngIf="_comment.hasError('maxlength')">Comment should not be longer then 256 symbols
+                </mat-error>
+              </mat-form-field>
 
-                <button mat-button matSuffix mat-icon-button >
-                  <mat-icon>send</mat-icon>
-                </button>
+              <button mat-button matSuffix mat-icon-button (click)="newComment()" style="float: right">
+                <mat-icon>send</mat-icon>
+              </button>
             </form>
-            <p *ngFor="let chapter of allChapters" class="mt-4">
-              123
-            </p>
+            <div *ngIf="allComments">
+              <div *ngFor="let comment of allComments">
+                <button mat-button matSuffix mat-icon-button (click)="deleteComment(comment)"
+                        *ngIf="comment.author.id === authenticationService.getDecodedUser().sub"
+                        style="float: right;">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+                <div class="border mb-3 pl-3 pr-3">
+                  <div class="mt-3" style="height: 40px;">
+                    <a [routerLink]="['/profile', comment.author.id]" class="link">
+                      <span>
+                        {{comment.author.username}}
+                      </span>
+                    </a>
+                  </div>
+                  <p class="mb-3">
+                    {{comment.content}}
+                    <br>
+                    <small style="float: right">{{comment.date | date:'medium'}}</small>
+                  </p>
+                </div>
+              </div>
+            </div>
           </mat-expansion-panel>
         </mat-accordion>
       </div>

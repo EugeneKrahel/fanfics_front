@@ -1,4 +1,3 @@
-import {User} from './user';
 import {Genre} from './enums/genre.enum';
 
 export class Fanfic {

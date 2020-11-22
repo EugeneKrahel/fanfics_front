@@ -6,6 +6,10 @@ import {switchMap} from 'rxjs/operators';
 import {FanficsService} from '../services/fanfics.service';
 import {Fanfic} from '../models/fanfic';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CommentsService} from '../services/comments.service';
+import {Comment} from '../models/comment';
+import {AuthenticationService} from '../services/authentication.service';
+import {CommentWithUser} from '../models/commentWithUser';
 
 @Component({
   selector: 'app-read-fanfic',
@@ -16,15 +20,19 @@ export class ReadFanficComponent implements OnInit {
 
   fanficId: number;
   allChapters: Chapter[];
+  allComments: CommentWithUser[];
   currentChapter: Chapter;
   contentsOpenState = true;
   commentsOpenState = false;
   fanfic: Fanfic;
   newCommentForm: FormGroup;
+  Date = (Date.now());
 
   constructor(private route: ActivatedRoute,
               private chaptersService: ChaptersService,
               private fanficsService: FanficsService,
+              private commentsService: CommentsService,
+              private authenticationService: AuthenticationService,
               private fb: FormBuilder) {
     this.createForm();
   }
@@ -49,11 +57,38 @@ export class ReadFanficComponent implements OnInit {
       this.fanfic = data;
       console.log(this.fanfic);
     });
+    this.getComments();
   }
 
   viewChapter(chapter: Chapter): void {
     this.currentChapter = chapter;
     this.contentsOpenState = false;
+  }
+
+  newComment(): void {
+    if (this.newCommentForm.value.comment) {
+      const comment: Comment = new Comment();
+      comment.authorId = this.authenticationService.getDecodedUser().sub;
+      comment.content = this.newCommentForm.value.comment;
+      comment.fanficId = this.fanficId;
+      this.commentsService.save(comment).subscribe(data =>
+        console.log(data));
+    }
+  }
+
+  deleteComment(comment: CommentWithUser): void {
+    this.commentsService.delete(comment).subscribe(data => {
+      console.log(data);
+      this.getComments();
+    });
+  }
+
+  getComments(): void {
+    this.commentsService.searchByFanfic(this.fanficId).subscribe(data => {
+      this.allComments = data;
+      this.allComments.sort((a, b) => a.id > b.id ? 1 : -1);
+      console.log('comments:', this.allComments);
+    });
   }
 
   private createForm(): void {
