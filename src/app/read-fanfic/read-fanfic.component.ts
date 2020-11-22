@@ -5,6 +5,7 @@ import {ChaptersService} from '../services/chapters.service';
 import {switchMap} from 'rxjs/operators';
 import {FanficsService} from '../services/fanfics.service';
 import {Fanfic} from '../models/fanfic';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-read-fanfic',
@@ -16,12 +17,20 @@ export class ReadFanficComponent implements OnInit {
   fanficId: number;
   allChapters: Chapter[];
   currentChapter: Chapter;
-  panelOpenState = true;
+  contentsOpenState = true;
+  commentsOpenState = false;
   fanfic: Fanfic;
+  newCommentForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
               private chaptersService: ChaptersService,
-              private fanficsService: FanficsService) {
+              private fanficsService: FanficsService,
+              private fb: FormBuilder) {
+    this.createForm();
+  }
+
+  get _comment(): AbstractControl {
+    return this.newCommentForm.get('comment');
   }
 
   ngOnInit(): void {
@@ -44,6 +53,13 @@ export class ReadFanficComponent implements OnInit {
 
   viewChapter(chapter: Chapter): void {
     this.currentChapter = chapter;
-    this.panelOpenState = false;
+    this.contentsOpenState = false;
+  }
+
+  private createForm(): void {
+    this.newCommentForm = this.fb.group({
+        comment: ['', [Validators.required, Validators.maxLength(512)]]
+      }
+    );
   }
 }

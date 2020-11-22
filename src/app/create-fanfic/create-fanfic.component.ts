@@ -16,8 +16,6 @@ import {FanficsService} from '../services/fanfics.service';
 })
 export class CreateFanficComponent implements OnInit {
 
-  nameValue = '';
-  descriptionValue = '';
   newFanficForm: FormGroup;
   genres = [
     Genre.adventure,
