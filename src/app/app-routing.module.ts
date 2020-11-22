@@ -12,6 +12,7 @@ import {FanficEditorComponent} from './fanfic-editor/fanfic-editor.component';
 import {NewChapterComponent} from './new-chapter/new-chapter.component';
 import {EditChapterComponent} from './edit-chapter/edit-chapter.component';
 import {ReadFanficComponent} from './read-fanfic/read-fanfic.component';
+import {ConfirmationComponent} from './confirmation/confirmation.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,12 @@ const routes: Routes = [
   {
     path: 'chapter/:id/edit', component: EditChapterComponent, children: [
       {path: '', component: AppComponent, canActivate: [AuthGuard]}
+    ]
+  },
+
+  {
+    path: 'confirm/:email/:confirmKey', component: ConfirmationComponent, children: [
+      {path: '', component: AppComponent, canActivate: [NoAuthGuard]}
     ]
   }
 ];

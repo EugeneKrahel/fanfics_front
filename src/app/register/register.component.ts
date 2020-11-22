@@ -4,6 +4,7 @@ import {matchValidator} from '../validators/password.validator';
 import {User} from '../models/user';
 import {UsersService} from '../services/users.service';
 import {Role} from '../models/enums/role.enum';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,9 @@ export class RegisterComponent implements OnInit {
   hide = true;
   newUserForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private usersService: UsersService) {
+  constructor(private fb: FormBuilder,
+              private usersService: UsersService,
+              public dialog: MatDialog) {
     this.createForm();
   }
 
@@ -49,6 +52,7 @@ export class RegisterComponent implements OnInit {
       },
       (err) => console.log(err)
     );
+    this.dialog.open(DialogComponent);
   }
 
   private createForm(): void {
@@ -61,4 +65,11 @@ export class RegisterComponent implements OnInit {
       validator: matchValidator('password', 'confirmPassword')
     });
   }
+}
+
+@Component({
+  selector: 'app-dialog',
+  templateUrl: './dialog.html',
+})
+export class DialogComponent{
 }

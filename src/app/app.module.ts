@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {RegisterComponent} from './register/register.component';
+import {DialogComponent, RegisterComponent} from './register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
@@ -34,6 +34,8 @@ import {MarkdownModule} from 'ngx-markdown';
 import {EditChapterComponent} from './edit-chapter/edit-chapter.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {ReadFanficComponent} from './read-fanfic/read-fanfic.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import {ReadFanficComponent} from './read-fanfic/read-fanfic.component';
     FanficEditorComponent,
     NewChapterComponent,
     EditChapterComponent,
-    ReadFanficComponent
+    ReadFanficComponent,
+    ConfirmationComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +75,8 @@ import {ReadFanficComponent} from './read-fanfic/read-fanfic.component';
     MatPaginatorModule,
     MatSortModule,
     MarkdownModule.forRoot({loader: HttpClient}),
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule
   ],
   providers: [jwtInterceptorProvider, errorInterceptorProvider],
   bootstrap: [AppComponent]
