@@ -37,3 +37,21 @@ $candy-app-theme: mat-light-theme((
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($candy-app-theme);
+
+a:link {
+  color: blue;
+  text-decoration: none;
+}
+
+a:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+.link {
+  color: blue;
+}
+
+mat-icon {
+  color: black;
+}

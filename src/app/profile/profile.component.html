@@ -26,16 +26,18 @@
           <ng-container matColumnDef="ReadEditDelete">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions</th>
             <td mat-cell *matCellDef="let row">
-              <button mat-button matSuffix mat-icon-button>
-                <mat-icon
-                  [routerLink]="['/fanfic', row.id, 'read']">
-                  preview
-                </mat-icon>
-              </button>
-              <button *ngIf="isEditor()" mat-button matSuffix mat-icon-button
-                      [routerLink]="['/fanfic', row.id, 'edit']">
-                <mat-icon>edit</mat-icon>
-              </button>
+              <a [routerLink]="['/fanfic', row.id, 'read']" class="link">
+                <button mat-button matSuffix mat-icon-button>
+                  <mat-icon>
+                    preview
+                  </mat-icon>
+                </button>
+              </a>
+              <a [routerLink]="['/fanfic', row.id, 'edit']" class="link">
+                <button *ngIf="isEditor()" mat-button matSuffix mat-icon-button>
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </a>
               <button *ngIf="isEditor()" mat-button matSuffix mat-icon-button (click)="delete(row)">
                 <mat-icon>delete</mat-icon>
               </button>
@@ -46,7 +48,8 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
           <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No fanfics <span *ngIf="input.value">containing "{{input.value}}"</span></td>
+            <td class="mat-cell" colspan="4">No fanfics <span *ngIf="input.value">containing "{{input.value}}"</span>
+            </td>
           </tr>
         </table>
       </div>

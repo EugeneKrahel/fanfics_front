@@ -96,10 +96,11 @@
       </div>
 
       <mat-divider class="mb-2"></mat-divider>
-      <button mat-flat-button color="primary" style="margin: 10px 5px "
-              (click)="create()"
-              [routerLink]="['/']">Create
-      </button>
+      <a [routerLink]="['/']" class="link">
+        <button mat-flat-button color="primary" style="margin: 10px 5px "
+                (click)="create()">Create
+        </button>
+      </a>
     </div>
     <div class="col-lg-3 col-md-2 col-sm-1"></div>
   </div>

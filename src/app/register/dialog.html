@@ -1,5 +1,7 @@
 <h1 mat-dialog-title>Confirm your email!</h1>
 <div mat-dialog-content>Open your email and confirm it</div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close [routerLink]="['/']">Close</button>
+  <a [routerLink]="['/']" class="link">
+    <button mat-button mat-dialog-close>Close</button>
+  </a>
 </div>

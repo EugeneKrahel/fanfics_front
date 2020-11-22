@@ -4,6 +4,7 @@
     <div class="col-lg-6 col-md-8 col-sm-10">
       <mat-spinner *ngIf="!message"></mat-spinner>
       <h2 *ngIf="message">Confirmation {{message}}</h2>
+      <a [routerLink]="['/']"><button mat-flat-button color="primary" style="margin: 10px 5px " class="link">Home page</button></a>
     </div>
     <div class="col-lg-3 col-md-2 col-sm-1"></div>
   </div>

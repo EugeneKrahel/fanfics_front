@@ -5,7 +5,7 @@
       <h2>Fanfic's info:</h2>
       <h3>Title: {{this.fanfic?.title}}</h3>
       <h3>Genre: {{this.fanfic?.genre}}</h3>
-<!--      <h3>Description: {{this.fanfic?.des}}</h3>-->
+      <!--      <h3>Description: {{this.fanfic?.des}}</h3>-->
       <div *ngIf="this.chapters?.length">
         <h3>Chapters:</h3>
 
@@ -18,10 +18,11 @@
               </div>
               <div class="col-8>">
 
-                <button mat-button matSuffix mat-icon-button
-                        [routerLink]="['/chapter', chapter.id, 'edit']">
-                  <mat-icon>edit</mat-icon>
-                </button>
+                <a [routerLink]="['/chapter', chapter.id, 'edit']" class="link">
+                  <button mat-button matSuffix mat-icon-button>
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </a>
                 <button mat-button matSuffix mat-icon-button (click)="delete(chapter)">
                   <mat-icon>
                     delete
@@ -33,11 +34,12 @@
           </li>
         </ul>
       </div>
-      <button mat-flat-button color="primary"
-              [routerLink]="['/fanfic', this.fanfic?.id, 'edit', 'new']">
-        Add chapter
-        <mat-icon>add</mat-icon>
-      </button>
+      <a [routerLink]="['/fanfic', this.fanfic?.id, 'edit', 'new']" class="link">
+        <button mat-flat-button color="primary">
+          Add chapter
+          <mat-icon>add</mat-icon>
+        </button>
+      </a>
     </div>
     <div class="col-lg-3 col-md-2 col-sm-1"></div>
   </div>

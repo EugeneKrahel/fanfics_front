@@ -47,7 +47,9 @@
         </div>
       </form>
       <button mat-flat-button color="primary" style="margin: 10px 5px " (click)="register()">Register</button>
-      <button mat-flat-button color="primary" style="margin: 10px 5px" [routerLink]="['']">Cancel</button>
+      <a [routerLink]="['']" class="link">
+      <button mat-flat-button color="primary" style="margin: 10px 5px">Cancel</button>
+      </a>
     </div>
     <div class="col-lg-3 col-md-2 col-sm-1"></div>
   </div>
