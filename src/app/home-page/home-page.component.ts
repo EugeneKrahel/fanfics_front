@@ -7,7 +7,6 @@ import {ActivatedRoute} from '@angular/router';
 import {AuthenticationService} from '../services/authentication.service';
 import {FanficsService} from '../services/fanfics.service';
 import {MatPaginator} from '@angular/material/paginator';
-import {User} from '../models/user';
 
 @Component({
   selector: 'app-home-page',
@@ -46,8 +45,8 @@ export class HomePageComponent implements OnInit {
   delete(fanfic: Fanfic): void {
     this.fanficsService.delete(fanfic).subscribe(data => {
       console.log(data);
+      this.search();
     });
-    this.search();
   }
 
   search(): void {
