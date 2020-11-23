@@ -6,48 +6,54 @@
         <div class="row">
           <div class="col-lg-1 col-md-2 col-sm-3">
             <a [routerLink]="['']" class="link">
-            <img style="cursor: pointer; margin: 10px 5px 10px 0;" width="36" height="36"
-                 src="https://lh3.googleusercontent.com/k75o6MEvqLq-rC60_ZMzUo9euudfoGDHAT7FQA9hkqO90C2VNDoZnN0PSDw8rPqAAZFMwJhSeI19ihF0TYyZzw=s400">
+              <img style="cursor: pointer; margin: 10px 5px 10px 0;" width="36" height="36"
+                   src="https://lh3.googleusercontent.com/k75o6MEvqLq-rC60_ZMzUo9euudfoGDHAT7FQA9hkqO90C2VNDoZnN0PSDw8rPqAAZFMwJhSeI19ihF0TYyZzw=s400">
             </a>
           </div>
           <div class="col-lg-7 col-md-4 col-sm-4">
             <a [routerLink]="['/new']" class="link">
-            <button mat-flat-button color="primary"
-                    style="margin: 10px 5px 10px 0;"
-                    *ngIf="isAuthorized()">
-              New fanfic
-            </button>
+              <button mat-flat-button color="primary"
+                      style="margin: 10px 5px 10px 0;"
+                      *ngIf="isAuthorized()">
+                New fanfic
+              </button>
             </a>
+            <mat-slide-toggle *ngIf="isAuthorized()"
+                              [checked]="isDarkTheme"
+                              (change)="toggleDarkTheme($event.checked)">
+              Dark theme
+            </mat-slide-toggle>
           </div>
           <div class="col-lg-4 col-md-6 col-sm-5">
             <a *ngIf="!isAuthorized()" [routerLink]="['/login']" class="link">
-            <button mat-flat-button color="primary"
-                    style="margin: 10px 5px;"
-                    *ngIf="!isAuthorized()">
-              Login
-            </button>
+              <button mat-flat-button color="primary"
+                      style="margin: 10px 5px;"
+                      *ngIf="!isAuthorized()">
+                Login
+              </button>
             </a>
             <a *ngIf="!isAuthorized()" [routerLink]="['/registration']" class="link">
-            <button mat-flat-button color="primary"
-                    style="margin: 10px 0 10px 5px;"
-                    *ngIf="!isAuthorized()">
-              Registration
-            </button>
+              <button mat-flat-button color="primary"
+                      style="margin: 10px 0 10px 5px;"
+                      *ngIf="!isAuthorized()">
+                Registration
+              </button>
             </a>
-            <a *ngIf="isAuthorized()" [routerLink]="['/profile', authenticationService.getDecodedUser().sub]" class="link">
-            <button mat-flat-button color="primary"
-                    style="margin: 10px 5px 10px 0;"
-                    *ngIf="isAuthorized()">
-              Profile
-            </button>
+            <a *ngIf="isAuthorized()" [routerLink]="['/profile', authenticationService.getDecodedUser().sub]"
+               class="link">
+              <button mat-flat-button color="primary"
+                      style="margin: 10px 5px 10px 0;"
+                      *ngIf="isAuthorized()">
+                Profile
+              </button>
             </a>
             <a *ngIf="isAuthorized()" [routerLink]="['']" class="link">
-            <button mat-flat-button color="primary"
-                    style="margin: 10px 0 10px 5px;"
-                    *ngIf="isAuthorized()"
-                    (click)="logout()">
-              Logout
-            </button>
+              <button mat-flat-button color="primary"
+                      style="margin: 10px 0 10px 5px;"
+                      *ngIf="isAuthorized()"
+                      (click)="logout()">
+                Logout
+              </button>
             </a>
           </div>
         </div>

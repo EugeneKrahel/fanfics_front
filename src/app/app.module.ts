@@ -36,6 +36,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {ReadFanficComponent} from './read-fanfic/read-fanfic.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {ThemeService} from './services/theme.service';
 
 @NgModule({
   declarations: [
@@ -76,9 +78,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatSortModule,
     MarkdownModule.forRoot({loader: HttpClient}),
     MatExpansionModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSlideToggleModule
   ],
-  providers: [jwtInterceptorProvider, errorInterceptorProvider],
+  providers: [jwtInterceptorProvider, errorInterceptorProvider, ThemeService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -6,5 +6,6 @@ export class User {
   email: string;
   password: string;
   key: string;
+  unicornDarkTheme: boolean;
   role: Role;
 }

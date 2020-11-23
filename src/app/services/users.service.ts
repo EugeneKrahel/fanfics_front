@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../models/user';
 import {environment} from '../../environments/environment';
-import {Chapter} from '../models/chapter';
 
 @Injectable({providedIn: 'root'})
 export class UsersService {

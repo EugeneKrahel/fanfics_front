@@ -1,2 +1,4 @@
-<app-tool-bar></app-tool-bar>
-<router-outlet></router-outlet>
+<div [ngClass]="{'dark-theme': darkTheme }" style="min-height: 100%">
+  <app-tool-bar></app-tool-bar>
+  <router-outlet></router-outlet>
+</div>
