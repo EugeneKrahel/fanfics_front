@@ -22,37 +22,28 @@ export class ConfirmationComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-          console.log(params);
-
-          this.email = params.email;
-          console.log(this.email);
-        }
-      );
-
-    this.route.paramMap.pipe(
-      switchMap(params => params.getAll('email'))).subscribe(
-      email => {
-        this.email = email;
-        this.usersService.getUserByEmail(email).subscribe(user => {
+        console.log(params);
+        this.email = params.email;
+        this.usersService.getUserByEmail(this.email).subscribe(user => {
           this.user = user;
-          this.route.paramMap.pipe(
-            switchMap(params => params.getAll('confirmKey'))).subscribe(
-            key => {
-              if (key && key === this.user.key) {
-                this.user.key = null;
-                this.usersService.update(this.user).subscribe(
-                  data => {
-                    console.log(data);
-                  }
-                );
-                this.message = 'successfully!';
-              } else {
-                this.message = 'failed.';
-              }
-            });
+          this.route.queryParams.subscribe(data => {
+            console.log(data);
+            console.log(data.token);
+            if (data && data.token === this.user.key) {
+              this.user.key = null;
+              this.usersService.update(this.user).subscribe(
+                userData => {
+                  console.log(userData);
+                }
+              );
+              this.message = 'successfully!';
+            } else {
+              this.message = 'failed.';
+            }
+          });
         });
-
-      });
+      }
+    );
   }
 
 }
