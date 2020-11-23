@@ -34,11 +34,11 @@
                 </button>
               </a>
               <a [routerLink]="['/fanfic', row.id, 'edit']" class="link">
-                <button *ngIf="isEditor()" mat-button matSuffix mat-icon-button>
+                <button *ngIf="isEditor() || canEdit" mat-button matSuffix mat-icon-button>
                   <mat-icon>edit</mat-icon>
                 </button>
               </a>
-              <button *ngIf="isEditor()" mat-button matSuffix mat-icon-button (click)="delete(row)">
+              <button *ngIf="isEditor() || canEdit" mat-button matSuffix mat-icon-button (click)="delete(row)">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>

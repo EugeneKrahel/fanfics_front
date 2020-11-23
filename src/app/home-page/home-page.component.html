@@ -45,6 +45,9 @@
                   </mat-icon>
                 </button>
               </a>
+              <button *ngIf="canEdit" mat-button matSuffix mat-icon-button (click)="delete(row)">
+                <mat-icon>delete</mat-icon>
+              </button>
             </td>
           </ng-container>
 

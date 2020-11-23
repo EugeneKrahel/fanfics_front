@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {AuthenticationService} from '../services/authentication.service';
 import {FanficsService} from '../services/fanfics.service';
 import {MatPaginator} from '@angular/material/paginator';
+import {User} from '../models/user';
 
 @Component({
   selector: 'app-home-page',
@@ -19,6 +20,7 @@ export class HomePageComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   userFanfics: Fanfic[];
+  canEdit: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +31,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.search();
+    this.isAdmin();
   }
 
   applyFilter(event: Event): void {
@@ -59,4 +62,11 @@ export class HomePageComponent implements OnInit {
     );
   }
 
+  isAdmin(): void {
+    this.usersService.getUserById(this.authenticationService.getDecodedUser().sub).subscribe(data => {
+      if (data.role === 'ADMIN') {
+        this.canEdit = true;
+      }
+    });
+  }
 }

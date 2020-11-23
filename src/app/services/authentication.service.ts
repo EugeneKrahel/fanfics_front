@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {ApplicationUser} from '../models/application.user';
 import jwt_decode from 'jwt-decode';
 import {environment} from '../../environments/environment';
+import {UsersService} from './users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class AuthenticationService {
   public currentUser: Observable<ApplicationUser>;
   private currentUserSubject: BehaviorSubject<ApplicationUser>;
 
-  constructor(private readonly http: HttpClient) {
+  constructor(private readonly http: HttpClient,
+              private usersService: UsersService) {
     this.currentUserSubject = new BehaviorSubject<ApplicationUser>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }

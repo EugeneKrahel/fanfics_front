@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
 
   id: number;
   user: User;
+  canEdit: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,6 +40,7 @@ export class ProfileComponent implements OnInit {
       console.log(data);
     });
     this.search();
+    this.isAdmin();
   }
 
   applyFilter(event: Event): void {
@@ -66,6 +68,14 @@ export class ProfileComponent implements OnInit {
 
   isEditor(): boolean {
     return this.id === this.authenticationService.getDecodedUser().sub;
+  }
+
+  isAdmin(): void {
+    this.usersService.getUserById(this.authenticationService.getDecodedUser().sub).subscribe(data => {
+      if (data.role === 'ADMIN') {
+        this.canEdit = true;
+      }
+    });
   }
 }
 
