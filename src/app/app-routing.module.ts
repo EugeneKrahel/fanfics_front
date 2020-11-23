@@ -70,7 +70,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'confirm/:email/:confirmKey', component: ConfirmationComponent, children: [
+    path: 'confirm?email=:email&token=:confirmKey', component: ConfirmationComponent, children: [
       {path: '', component: AppComponent, canActivate: [NoAuthGuard]}
     ]
   }
