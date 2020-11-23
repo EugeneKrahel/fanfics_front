@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.newUserForm.value.email, this.newUserForm.value.password)
       .subscribe(data => {
         console.log(data);
+        location.reload();
       });
   }
 

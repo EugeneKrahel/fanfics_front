@@ -37,7 +37,6 @@ import {ReadFanficComponent} from './read-fanfic/read-fanfic.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {ThemeService} from './services/theme.service';
 
 @NgModule({
   declarations: [
@@ -81,7 +80,7 @@ import {ThemeService} from './services/theme.service';
     MatProgressSpinnerModule,
     MatSlideToggleModule
   ],
-  providers: [jwtInterceptorProvider, errorInterceptorProvider, ThemeService],
+  providers: [jwtInterceptorProvider, errorInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule {
