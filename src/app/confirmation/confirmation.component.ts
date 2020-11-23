@@ -22,18 +22,15 @@ export class ConfirmationComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-        console.log(params);
         this.email = params.email;
         this.usersService.getUserByEmail(this.email).subscribe(user => {
           this.user = user;
           this.route.queryParams.subscribe(data => {
-            console.log(data);
-            console.log(data.token);
             if (data && data.token === this.user.key) {
               this.user.key = null;
               this.usersService.update(this.user).subscribe(
                 userData => {
-                  console.log(userData);
+                  console.log('success! ', userData.key);
                 }
               );
               this.message = 'successfully!';
