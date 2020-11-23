@@ -21,6 +21,14 @@ export class ConfirmationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+          console.log(params);
+
+          this.email = params.email;
+          console.log(this.email);
+        }
+      );
+
     this.route.paramMap.pipe(
       switchMap(params => params.getAll('email'))).subscribe(
       email => {
